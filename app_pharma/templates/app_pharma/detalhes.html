@@ -1,0 +1,383 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block 'titulo' %}DETALHE {% endblock %} 
+{% block 'conteudo' %}
+
+
+{% for produto in produtos %}
+
+
+<div class="container-fluid secao-breadcrumb d-flex align-items-center mb-5">
+  <div class="container d-flex align-items-center">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item">
+          <a href="#" class="desativar">{{produto.tag}}</a>
+        </li>
+        <li class="breadcrumb-item" aria-current="page">
+          {{produto.nome_produto}}
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- TODO:DETALHES -->
+<div class="container mt-5 secao-detalhes-produto">
+  <div class="row justify-content-between">
+    <div class="col-12 col-md-6 detalhes-produto-img">
+      <img src="{{produto.imagem_produto.url}}" alt="" />
+    </div>
+    <div class="col-12 col-md-6 detalhes-produto-info">
+      <div class="detalhes-produto-reviews">
+        <span class="starRandom container-star mb-2"> </span>
+        <span class="detalhes-produto-comentarios mb-2">
+          <a class="desativar" href="#">(3 Opiniões dos consumidores)</a>
+        </span>
+      </div>
+
+      <h1 class="card-title mt-1">{{produto.nome_produto}}</h1>
+
+      <span class="card-preco mt-2 mb-2 d-flex">
+            {% if produto.preco_promocional %}
+                <p class="card-text preco-descontado">{{produto.preco_real}}</p>
+                <p class="card-text preco-principal">{{produto.preco_promocional}}</p>
+                  {% else %}
+                  <p class="card-text preco-principal">{{produto.preco_real}}</p>                        
+                   {% endif %}
+      </span>
+
+      <p class="card-paragrafo">
+        {{produto.descricao_media}}
+      </p>
+
+      <div class="detalhes-produto-comprar d-flex mt-4">
+        <div class="container-compras">
+          <span class="qodef-quantity-label">Quantidade</span>
+          <div class="quantity">
+            <input type="number" min="1" max="{{produto.estoque}}" step="1" value="1" />
+          </div>
+        </div>
+
+        <button class="btn btn-compra d-flex align-items-center">
+          <i class="fas fa-shopping-cart"></i>Comprar agora
+        </button>
+      </div>
+
+      <div class="detalhes-produto-media d-flex align-items-center mt-2">
+        <span class="detalhes-produto-desejo"
+          ><i class="bi bi-heart"></i>
+          Add a lista de desejo
+        </span>
+
+        <div class="d-flex detalhes-produto-icon">
+          <p>compartilhar:</p>
+          <span class="detalhes-produto-icones">
+            <a class="desativar" href="">
+              <i class="fab fa-facebook-square"></i>
+            </a>
+            <a class="desativar" href="">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a class="desativar" href="">
+              <i class="fab fa-twitter-square"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <ul class="mt-5 lista-info">
+        <li>
+          <p class="detalhes-produto-titulo">
+            <span>Estoque disponivel:</span>
+            {{produto.estoque}}
+          </p>
+        </li>
+        <li>
+          <p class="detalhes-produto-titulo">
+            <span>Categoria:</span>
+            <span class="categoria-link">
+             {% for cat in produto.categoria.all %}   
+                      <a class="desativar categoria_valores" href="#">{{cat}}</a>
+               {% endfor %}
+            </span>
+          </p>
+        </li>
+
+        <li>
+          <p class="detalhes-produto-titulo">
+            <span>Tag:</span>
+            <a class="desativar" href="#">{{produto.tag}}</a>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- TODO: info -->
+
+<div class="container secao-detalhes-info">
+  <div class="row justify-content-between tabs">
+    <a href="#item1" class="col-md-4 item-filtros item-filtros-ativo d-flex justify-content-center align-items-center shadow-sm
+        tab-item ">Descrição</a>
+    <a
+      href="#item2"
+      class="
+        col-md-4
+        item-filtros item-filtros-ativo
+        d-flex
+        justify-content-center
+        align-items-center
+        shadow-sm
+        tab-item
+      "
+      >Informações adicionais</a
+    >
+    <a
+      href="#item3"
+      class="
+        col-md-4
+        item-filtros item-filtros-ativo
+        d-flex
+        justify-content-center
+        align-items-center
+        shadow-sm
+        tab-item
+      "
+      >Avaliações</a
+    >
+  </div>
+
+  <div class="wrapper_tab-content mt-5 mb-5">
+    <article id="item1" class="tab-content">
+      <h1>Descrição detalhada</h1>
+      <p>
+       {{produto.descricao_longa}}
+      </p>
+    </article>
+
+    <article id="item2" class="tab-content">
+      <div class="row">
+        <div class="col-6">
+          <ul class="list-group list-group-flush">
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Peso</span>
+              <span class="lista-info">{{produto.peso}}</span>
+            </li>
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Dimensões</span>
+              <span class="lista-info">{{produto.dimensões}}</span>
+            </li>
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Tamanho</span>
+              <span class="lista-info">{{produto.tamanho}}</span>
+            </li>
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Marca</span>
+              <span class="lista-info">{{produto.marca}}</span>
+            </li>
+
+            <li class="list-group-item"></li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <ul class="list-group list-group-flush">
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Tipo</span>
+              <span class="lista-info">{{produto.tipo}}</span>
+            </li>
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Substância ativa</span>
+              <span class="lista-info">{{produto.substancia}}</span>
+            </li>
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Uso</span>
+              <span class="lista-info">{{produto.uso}}</span>
+            </li>
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <span class="lista-dados">Efeitos colaterais</span>
+              <span class="lista-info">{{produto.efeitos}}</span>
+            </li>
+
+            <li class="list-group-item"></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article id="item3" class="tab-content d-none">
+      <h1>3 opiniões para Bioderma Atoderm Intensive Gel 250ml</h1>
+
+      <div class="container-comentarios mt-5">
+        <div class="comentario d-flex align-items-center">
+          <img src="{% static 'img/comen1.png' %}" alt="comentario" />
+          <div class="comentarios-dados">
+            <div class="nome-comentario d-flex">
+              <h5>Dr. Emma Wells</h5>
+              <span>8 meses atrás</span>
+            </div>
+            <span class="container-star mb-2">
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star"></i>
+            </span>
+            <p>Etiam ultricies nisi vel augue.</p>
+          </div>
+        </div>
+
+        <div class="comentario d-flex align-items-center">
+          <img src="{% static 'img/comen2.png' %}" alt="comentario" />
+          <div class="comentarios-dados">
+            <div class="nome-comentario d-flex">
+              <h5>Esther Powel</h5>
+              <span>8 meses atrás</span>
+            </div>
+            <span class="container-star mb-2">
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star"></i>
+            </span>
+            <p>Gosto deste produto e funciona bem nas minhas alergias.</p>
+          </div>
+        </div>
+
+        <div class="comentario d-flex align-items-center">
+          <img src="{% static 'img/comen3.png' %}" alt="comentario" />
+          <div class="comentarios-dados">
+            <div class="nome-comentario d-flex">
+              <h5>Michelle Hudson</h5>
+              <span>12 meses atrás</span>
+            </div>
+            <span class="container-star mb-2">
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+              <i class="bi bi-star-fill checkedStar"></i>
+            </span>
+            <p>
+              Melhores pílulas para alergia de todos os tempos! Eles funcionam
+              muito bem e o preço é incrível!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <h1 class="titulo-comentario">Deixe um comentário</h1>
+        <p class="paragrafo-titulo">
+          Seu endereço de e-mail não será publicado. Os campos obrigatórios
+          estão marcados com *
+        </p>
+      </div>
+
+      <form>
+        <div class="form-group mb-3">
+          <label for="inputEstrelas">Estrelas</label>
+          <div class="container-star">
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+            <i class="bi bi-star"></i>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="inputComentario">Comentário</label>
+          <textarea
+            class="form-control"
+            id="inputComentario"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="form-row d-flex">
+          <div class="form-group">
+            <label for="inputNome">Nome</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputNome"
+              placeholder="Nome"
+            />
+          </div>
+          <div class="form-group container-email">
+            <label for="inputEmail4">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="inputEmail4"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-enviar mt-4">Enviar</button>
+      </form>
+    </article>
+  </div>
+</div>
+ {% endfor %} 
+{% endblock %}

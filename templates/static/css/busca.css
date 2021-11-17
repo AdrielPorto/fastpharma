@@ -1,0 +1,88 @@
+.secao-breadcrumb {
+    background-color: #F8F8F8;
+    height: 5rem;
+    margin-bottom: 7rem !important;
+    
+}
+
+.breadcrumb {
+    margin-top: 1rem;
+
+}
+
+.breadcrumb li a {
+    color: #777;
+    font-size: 1.4rem;
+}
+
+.breadcrumb li a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb li {
+    font-size: 1.4rem;
+}
+
+.formularioPesquisa label{
+    color: #2c2c2c;
+    font-size: 3rem;
+    font-weight: 700;
+  margin-bottom: 1rem;
+}
+.formularioPesquisa p{
+    color: #777777;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+}
+
+.formularioPesquisa input{
+    border: 1px solid #ccc;
+    
+    height: 5rem;
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.6rem;
+}
+.formularioPesquisa button{
+    background-color: #66bc89;
+    height: 100%;
+    width: 6rem;
+    color: #fff;
+    transition: .3s;
+   
+}
+.formularioPesquisa button i{
+    font-size: 1.6rem;
+}
+.formularioPesquisa button:hover{
+    background-color: #3ca068;
+    color: white;
+}
+.secao-pesquisa{
+   margin-top: 5rem;
+   margin-bottom: 2rem;
+}
+.container-pesquisa img{
+height: 13rem;
+width: 13rem;
+}
+.info-pesquisa{
+    width: 80%;
+    max-width: 55rem;
+}
+.info-pesquisa h5 a{
+    color: #2c2c2c;
+    font-size: 2.4rem;
+    font-weight: 700;
+    transition: .3s;
+}
+
+.info-pesquisa h5 a:hover{
+    color:#777777;
+}
+
+.info-pesquisa p{
+    color: #777777;
+    font-size: 1.6rem;
+    
+}

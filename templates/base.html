@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    {% include "parciais/_head.html" %}
+    <title>FAST PHARMA - {% block 'titulo' %}{% endblock %}</title>
+  </head>
+  <body>
+    {% include "parciais/_nav.html" %} {% block 'conteudo' %}{% endblock %} 
+    {% include "parciais/_footer.html" %}
+  </body>
+</html>

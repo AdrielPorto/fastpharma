@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'titulo' %}BUSCA{% endblock %} 
+{% block 'conteudo' %}
+
+<div class="container-fluid secao-breadcrumb d-flex align-items-center ">
+    <div class="container d-flex align-items-center">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page">Resultados da pesquisa para "{{contexto.busca}}"</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+
+<div class="container mt-5">
+    <form class="formularioPesquisa" action="{% url 'busca' %}" method="get">
+        <label for="pesquisa">Nova pesquisa:</label>
+        <div class="input-group">
+
+            <input type="text" class="form-control" placeholder="Procurar" name="busca">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+        <p>Se você não estiver satisfeito com os resultados abaixo, faça outra pesquisa</p>
+    </form>
+</div>
+
+
+{% for produto in contexto.produtos %}
+
+
+
+
+
+<div class="container secao-pesquisa">
+
+    <div class="row">
+
+        <div class="col-12 container-pesquisa d-flex align-items-center mb-4">
+            <a href="{% url 'detalhes' produto.id %}">
+                <img src="{{ produto.imagem_produto.url }}" alt="">
+            </a>
+            <span class="info-pesquisa">
+                    <h5>
+                        <a href="{% url 'detalhes' produto.id %}"> {{ produto.nome_produto }}</a>
+                    </h5>
+                    <p> {{ produto.descricao_media }}</p>
+                </span>
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+
+{% endblock  %}

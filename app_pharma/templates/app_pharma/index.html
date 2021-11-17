@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block 'titulo' %}HOME{% endblock  %}
+
+
+
+{% block 'conteudo' %}
+
+<div class="container secao-slide mb-5 mt-5 home">
+    <div class="container-slide d-flex justify-content-between ">
+
+        <div class="slider row">
+
+            <div id="carouselExampleCaptions" class="carousel slide col-12" data-bs-ride="carousel">
+
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'img/slide1.png' %}" class="d-block " alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/slide2.png' %}" class="d-block " alt="...">
+
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/slide3.png' %}" class="d-block " alt="...">
+
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="container-banner row d-flex flex-column justify-content-between ">
+            <div class="banner  d-flex align-items-center justify-content-center">
+                <picture>
+                    <img src="{% static 'img/1.png' %}" alt="">
+
+                </picture>
+
+            </div>
+            <div class=" banner d-flex align-items-center justify-content-center">
+                <picture>
+
+                    <img src="{% static 'img/2.png' %}" alt="">
+                </picture>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container secao-filtros">
+    <div class="row justify-content-between">
+        <a href="#"
+           class="desativar col-md-3 item-filtros item-filtros-ativo d-flex justify-content-center align-items-center shadow-sm">
+            Mostrar todos
+        </a>
+        <a href="#" class="desativar col-md-3 item-filtros d-flex justify-content-center align-items-center shadow-sm">
+            Gripe e Resfriado
+        </a>
+
+        <a href="#" class="desativar col-md-3 item-filtros d-flex justify-content-center align-items-center shadow-sm">
+            Novos produtos
+        </a>
+        <a href="#" class="desativar col-md-3 item-filtros d-flex justify-content-center align-items-center shadow-sm">
+            Populares
+        </a>
+        <a href="#" class="desativar col-md-3 item-filtros d-flex justify-content-center align-items-center shadow-sm">
+            Recomendados
+        </a>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row clearfix">
+
+       {% for produto in contexto.produtos %}
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="card product_item ">
+
+                <div class="body">
+                    <div class="cp_img">
+                        <a href="{% url 'detalhes' produto.id %}">
+                            <img src="{{ produto.imagem_produto.url }}" alt="Produto" class="img-fluid">
+                        </a>
+                        <div class="hover">
+                            <a href="#" class="desativar btn btn-outline-info btn-sm waves-effect" data-bs-toggle="tooltip"
+                               data-bs-placement="left" title="Adicionar ao Carrinho">
+                                <i class="bi bi-bag"></i>
+                            </a>
+                            <a href="#" class="desativar btn btn-outline-info btn-sm waves-effect" data-bs-toggle="tooltip"
+                               data-bs-placement="right" title="Adicionar na lista de desejos">
+                                <i class="bi bi-heart"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product_details mt-2">
+                            <span class="starRandom container-star d-flex justify-content-center mb-2">
+                                
+                            </span>
+                        <h5><a href="{% url 'detalhes' produto.id %}">
+                            {{ produto.nome_produto }}</a></h5>
+                        <ul class="product_price list-unstyled">
+                        {% if produto.preco_promocional %}
+                            <li class="old_price">{{produto.preco_real}}</li>
+                            <li class="new_price">{{produto.preco_promocional}}</li>
+                        {% else %}
+                            <li class="new_price">{{produto.preco_real}}</li>
+                        
+                        {% endif %}
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+       
+
+      
+    </div>
+</div>
+
+<div class="secao-banner-covid container mt-3 mb-5 ">
+    <img src="{% static 'img/banner-covid.svg' %}" alt="">
+</div>
+
+<div class="secao-categoria container mt-5">
+    <div class="row">
+
+        <div class="coluna-categoria col-12 col-md-3">
+            <div class="titulos-categoria">
+                <h3>Categorias</h3>
+                <p>Lorem ipsum dolor sit aconsete tur sadipscing elitred nonumy</p>
+            </div>
+
+
+            <ul id="accordion" class="accordion">
+                <li>
+                    <div class="link"><i class="fas fa-prescription-bottle-alt"></i>Medicamentos<i
+                            class="fa fa-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/xarope.png' %}" alt="">
+                            <span>Xarope</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/cartela.png' %}" alt="">
+                            <span>Gripe e Resfriado</span>
+                        </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <div class="link"><i class="fas fa-allergies"></i>Alergias<i class="fa fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/pele.png' %}" alt="">
+                            <span>Para pele</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/probioticos.png' %}" alt="">
+
+                            <span>Probióticos</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/olhos.png' %}" alt="">
+                            <span>Para os olhos</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="link"><i class="fas fa-air-freshener"></i>Cosméticos<i
+                            class="fa fa-chevron-down"></i></div>
+                    <ul class="submenu">
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/xampu.png' %}" alt="">
+                            <span>Cremes</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/deso.png' %}" alt="">
+                            <span>Desodorantes</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/maquiagem.png' %}" alt="">
+                            <span>Maquiagem</span>
+                        </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <div class="link"><i class="fas fa-tablets"></i></i>Suplementos<i
+                            class="fa fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/nutricao.png' %}" alt="">
+                            <span>Nutrição</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/vita.png' %}" alt="">
+                            <span>Vitaminas</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="link"><i class="fas fa-hands-wash"></i>Higiene<i class="fa fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/boca.png' %}" alt="">
+                            <span>Produtos bocais</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/sabonete.png' %}" alt="">
+                            <span>Limpeza</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="link"><i class="fas fa-head-side-mask"></i>Proteção<i
+                            class="fa fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/mascara.png' %}" alt="">
+                            <span>Máscaras</span>
+                        </a>
+                        </li>
+                        <li><a href="#" class="desativar">
+                            <img src="{% static 'img/prese.png' %}" alt="">
+                            <span>Preservativo</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="link"><i class="fas fa-gifts"></i>Outros<i class="fa fa-chevron-down"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li>
+                            <a href="#" class="desativar">
+                                <img src="{% static 'img/bebe.png' %}" alt="">
+                                <span>Produtos para bebês</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="desativar">
+                                <img src="{% static 'img/cel.png' %}" alt="">
+                                <span>Recarga de celular</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+
+            <img class="img-categoria" src="{% static 'img/3.png' %}" alt="">
+
+        </div>
+        
+        <div class="coluna-produtos col-12 col-md-9 ">
+
+            <div class="row">
+
+        {% for produto in contexto.categorias %}
+                <div class="col-12 efeitoCard">
+                    <div class="card primary-bg-color  d-flex flex-row">
+                        <a href="{% url 'detalhes' produto.id %}">
+                            <img src="{{ produto.imagem_produto.url }}" class="card-img-top img-fluid" alt="Relógio">
+                        </a>
+                        <div class="card-body ">
+                                <span class="starRandom container-star  mb-2">
+                                    
+                                </span>
+                            <a href="{% url 'detalhes' produto.id %}">
+                                <h5 class="card-title ">{{ produto.nome_produto }}</h5>
+                            </a>
+                            <p class="card-paragrafo">{{ produto.descricao_curta }}</p>
+                            <span class="card-preco  d-flex">
+                             {% if produto.preco_promocional %}
+
+                            <p class="card-text preco-descontado">{{produto.preco_real}}</p>
+                            <p class="card-text preco-principal">{{produto.preco_promocional}}</p>
+                        {% else %}
+                             <p class="card-text preco-principal">{{produto.preco_real}}</p>                        
+                        {% endif %}
+                                   
+                                </span>
+
+                            <span class="container-card-detalhes mb-2">
+                                    <a href="{% url 'detalhes' produto.id %}" class="btn btn-success card-detalhes">
+                                        <i class="fas fa-info"></i>ver detalhes
+                                    </a>
+                                </span>
+
+                            <span class="card-outros d-flex align-items-center">
+                                    <span class="d-flex justify-content-center">
+                                        <i class="bi bi-bag"></i>Add ao carrinho
+                                    </span>
+
+                                    <span class="d-flex justify-content-center"><i class="bi bi-heart"></i>
+                                        Add a lista de desejo
+                                    </span>
+                                </span>
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock  %}

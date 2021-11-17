@@ -1,0 +1,133 @@
+{% load static %}
+<div
+  class="container info-top d-flex align-items-center justify-content-between"
+>
+  <ul class="lista-info-top d-flex justify-content-center">
+    <li>
+      <a href="tel:+55 21 98465-1798">Info :+55 21 98465-1798</a>
+    </li>
+    <li>
+      <a class="desativar" href="#">Sobre</a>
+    </li>
+    <li>
+      <a class="desativar" href="#">Informação de entrega</a>
+    </li>
+  </ul>
+
+  <span>FRETE GRATIS PARA PEDIDOS ACIMA DE R$ 30,00</span>
+</div>
+<hr />
+
+<div class="container mt-5 mb-5">
+  <div class="align-items-center d-flex justify-content-between menu-cadastro">
+    <div class="logo">
+      <a href="{% url 'index' %}">
+        <img src="{% static 'img/FastPharma.svg' %}" alt="" />
+      </a>
+    </div>
+    <div>
+      <form  action="{% url 'busca' %}" method="get">
+        <div class="input-group">
+          <div class="form-outline">
+            <input
+              type="search"
+              id="pesquisa"
+              class="form-control"
+              placeholder="Buscar..."
+            name="busca"/>
+          </div>
+          <button type="submit" class="btn btnPesquisa">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <a href="#" class="campo-icone d-flex align-items-center desativar">
+        <span>
+          <i class="bi bi-person"></i>
+        </span>
+        <span class="d-flex flex-column">
+          <span class="campo-icone-texto-principal">Conta</span>
+          <span class="campo-icone-texto-link">Login / Registro</span>
+        </span>
+      </a>
+    </div>
+    <div>
+      <a href="#" class="campo-icone d-flex align-items-center desativar">
+        <i class="bi bi-heart"></i>
+        <span class="d-flex flex-column">
+          <span class="campo-icone-texto-principal">Lista de Desejos</span>
+          <span class="campo-icone-texto-link">
+            Editar sua lista de desejos
+          </span>
+        </span>
+      </a>
+    </div>
+    <div>
+      <a href="" class="campo-icone d-flex align-items-center desativar">
+        <i class="bi bi-bag"></i>
+        <span class="d-flex flex-column">
+          <span class="campo-icone-texto-principal">Carrinho</span>
+          <span class="campo-icone-texto-link">R$ 22,50</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-menu pt-3 pb-3">
+  <div class="container">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#main_nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main_nav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link  lista-menu" href="{% url 'index' %}"
+            >Home
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle desativar"
+            href="#"
+            data-bs-toggle="dropdown"
+          >
+            Categorias
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item desativar" href="#"> Medicamentos</a>
+            </li>
+            <li><a class="dropdown-item desativar" href="#"> Alergias </a></li>
+            <li>
+              <a class="dropdown-item desativar" href="#"> Cosméticos </a>
+            </li>
+            <li>
+              <a class="dropdown-item desativar" href="#"> Suplementos </a>
+            </li>
+            <li><a class="dropdown-item desativar" href="#"> Higiene </a></li>
+            <li><a class="dropdown-item desativar" href="#"> Proteção </a></li>
+            <li><a class="dropdown-item desativar" href="#"> Outros </a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link lista-menu desativar" href="#"> Sobre </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link lista-menu desativar" href="#"> Contatos </a>
+        </li>
+      </ul>
+    </div>
+    <!-- navbar-collapse.// -->
+  </div>
+  <!-- container-fluid.// -->
+</nav>
